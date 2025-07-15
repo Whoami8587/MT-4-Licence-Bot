@@ -1,5 +1,5 @@
-aiogram==2.25.2
+aiogram==3.4.1
 flask
 python-dotenv
-SQLAlchemy
+sqlalchemy
 aiosqlite
