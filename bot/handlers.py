@@ -1,19 +1,13 @@
-from aiogram import types, Router, F
-from aiogram.types import Message, CallbackQuery
-from bot.utils import get_user_info, check_subscription_status
+from aiogram import Router, F
+from aiogram.types import Message
+from aiogram.filters import CommandStart
 
 router = Router()
 
-@router.message(F.text == "/start")
+@router.message(CommandStart())
 async def start_handler(message: Message):
-    await message.answer("👋 سلام! به ربات مدیریت لایسنس خوش اومدی.")
+    await message.answer("سلام! به ربات خوش آمدید.")
 
-@router.message(F.text == "/myinfo")
-async def user_info_handler(message: Message):
-    info = await get_user_info(message.from_user.id)
-    await message.answer(info)
-
-@router.message(F.text == "/status")
-async def status_handler(message: Message):
-    status = await check_subscription_status(message.from_user.id)
-    await message.answer(f"وضعیت اشتراک شما: {status}")
+@router.message(F.text)
+async def echo_handler(message: Message):
+    await message.answer(f"گفتی: {message.text}")
